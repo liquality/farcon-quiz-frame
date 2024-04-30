@@ -4,16 +4,16 @@ import { Button } from "frames.js/next";
 
 export const POST = frames(async () => {
   return {
-    image: <div tw="flex">Route 2</div>,
+    image: <div tw="flex">Sorry, that was the wrong response!</div>,
     buttons: [
-      <Button action="post" target="/">
-        Go to initial route
-      </Button>,
-      <Button
+      /*   <Button
         action="post"
         target={{ pathname: "/route1", query: { foo: "baz" } }}
       >
         Go to route 1
+      </Button>, */
+      <Button action="link" target={`http://localhost:3001/quiz/farcon`}>
+        Go to Leaderboard
       </Button>,
     ],
   };

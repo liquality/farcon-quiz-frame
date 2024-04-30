@@ -6,13 +6,13 @@ export const POST = frames(async (ctx) => {
   const foo = ctx.searchParams.foo;
 
   return {
-    image: <div tw="flex">Route 1 foo: {foo}</div>, // foo: bar
+    image: <div tw="flex">Correct response! {foo}</div>, // foo: bar
     buttons: [
-      <Button action="post" target="/">
+      /*    <Button action="post" target="/">
         Go back
-      </Button>,
-      <Button action="post" target="/route2">
-        Go to route 2
+      </Button>, */
+      <Button action="link" target={`http://localhost:3001/quiz/farcon`}>
+        Go to Leaderboard
       </Button>,
     ],
   };
