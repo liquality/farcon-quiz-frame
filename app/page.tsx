@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { createDebugUrl } from "./debug";
 import { appURL, currentURL } from "./utils";
+import Navbar from "./quiz/farcon/components/Navbar";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -20,11 +21,24 @@ export default async function Home() {
 
   // then, when done, return next frame
   return (
-    <div className="p-4">
-      Welcome to Liquality's farcon quiz! <br></br>
-      <Link href="/quiz/farcon" className="underline">
-        Go to Farcon Quiz 2024 Leaderboard
-      </Link>
+    <div>
+      <Navbar />
+      <div className="flex flex-col justify-center items-center h-screen">
+        <div className="p-4 text-center bg-containerGray rounded-2xl border border-subContainerGray">
+          <p className="mt-3 mb-3">Welcome to Liquality's farcon quiz!</p>
+          <a href="/">
+            <img
+              src="https://docs.liquality.io/img/logo_dark.svg"
+              width="100%"
+              alt="Logo"
+            />
+          </a>
+          <br></br>
+          <a href="/quiz/farcon" className="underline">
+            Go to Farcon Quiz 2024 Leaderboard
+          </a>
+        </div>
+      </div>
     </div>
   );
 }

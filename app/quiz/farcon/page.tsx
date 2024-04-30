@@ -3,6 +3,8 @@ import { currentURL, appURL } from "../../utils";
 import { createDebugUrl } from "../../debug";
 import type { Metadata } from "next";
 import { fetchMetadata } from "frames.js/next";
+import Navbar from "./components/Navbar";
+import LeaderboardTable from "./components/LeaderboardTable";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -19,11 +21,15 @@ export default async function Home() {
   const url = currentURL("/quiz/farcon");
 
   return (
-    <div>
-      Here goes the leaderboard or something!
-      {/* <Link href={createDebugUrl(url)} className="underline">
+    <div className="">
+      <Navbar />
+      <div className="p-5">
+        Here goes the leaderboard or something!
+        {/*   <LeaderboardTable /> */}
+        {/* <Link href={createDebugUrl(url)} className="underline">
         Debug
       </Link> */}
+      </div>
     </div>
   );
 }

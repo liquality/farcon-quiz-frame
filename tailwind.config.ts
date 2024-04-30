@@ -29,6 +29,10 @@ const config = {
     },
     extend: {
       colors: {
+        backgroundGray: "#111113",
+        containerGray: "#18191b",
+        subContainerGray: "#212225",
+        subtitleGray: "#6e7079",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
