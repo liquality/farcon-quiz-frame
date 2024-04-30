@@ -21,14 +21,9 @@ export default async function Home() {
   // then, when done, return next frame
   return (
     <div className="p-4">
-      frames.js starter kit. The Template Frame is on this page, it&apos;s in
-      the html meta tags (inspect source).{" "}
-      <Link href={createDebugUrl(url)} className="underline">
-        Debug
-      </Link>{" "}
-      or see{" "}
-      <Link href="/examples" className="underline">
-        other examples
+      Welcome to Liquality's farcon quiz! <br></br>
+      <Link href="/quiz/farcon" className="underline">
+        Go to Farcon Quiz 2024 Leaderboard
       </Link>
     </div>
   );
