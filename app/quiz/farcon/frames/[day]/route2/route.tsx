@@ -1,8 +1,11 @@
 /* eslint-disable react/jsx-key */
-import { frames } from "../frames";
+import { findDayFromUrl } from "../../database-operations";
+import { frames } from "../../frames";
 import { Button } from "frames.js/next";
 
-export const POST = frames(async () => {
+export const POST = frames(async (ctx) => {
+  const questionId = findDayFromUrl(ctx);
+
   return {
     image: <div tw="flex">Sorry, that was the wrong response!</div>,
     buttons: [

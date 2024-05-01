@@ -1,4 +1,5 @@
 import { sql } from "@vercel/postgres"
+import { FramesContext } from "frames.js/types"
 
 export async function saveUser(ud: any, channelName: string, walletAddress: string) {
     const channel = await getChannel(channelName)
@@ -26,6 +27,15 @@ export async function getQuestionFromId(questionId: number) {
     AND expires_at::timestamp AT TIME ZONE 'MST' > current_timestamp AT TIME ZONE 'MST';
     `
     return question.rows.length > 0 ? question.rows[0] : null
+}
+
+
+export function findDayFromUrl(ctx: any) {
+    const parts = ctx.url.pathname.split("/");
+    if (parts.length <= 4 || !parts[4]) {
+        throw new Error("Frame question id not found");
+    }
+    return parts[4]
 }
 
 
