@@ -13,8 +13,16 @@ export async function saveUser(fid: number) {
         const selectedNewUser = await sql`SELECT * FROM users WHERE fid = ${fid}`
         return selectedNewUser.rows[0]
     } else return existingUser.rows[0]
+}
 
-
+export async function saveUserQuestionResponse(
+    questionId: string,
+    fid: number,
+    response: string,
+    correctResponse: boolean
+) {
+    const user = await getUserFromFid(fid)
+    await sql`INSERT INTO user_question_responses (question_id, user_id, response, correct_response) VALUES (${questionId}, ${user?.id}, ${response}, ${correctResponse});`
 }
 
 export async function determineCollectiveForUser(fid: number) {
@@ -44,7 +52,6 @@ export async function isPowerBadgeUser(
             throw new Error('Network response was not ok')
         }
         const data = await resp.json()
-        console.log(data.users, 'DATA USERS FOR NEYNAR PROFILE')
         if (data.users[0].power_badge) {
             return true
         } else return false
@@ -59,6 +66,16 @@ export async function getCollective(collectiveName: string) {
     return existingCollective.rows[0]
 }
 
+export async function getUserFromFid(fid: number) {
+    const selectedNewUser = await sql`SELECT * FROM users WHERE fid = ${fid}`
+    return selectedNewUser.rows[0]
+}
+
+
+export async function getUserQuestionResponseFromUserId(userId: number) {
+    const response = await sql`SELECT * FROM user_question_responses WHERE user_id = ${userId}`
+    return response.rows[0]
+}
 
 export async function getQuestionFromId(questionId: number) {
     const question = await sql`

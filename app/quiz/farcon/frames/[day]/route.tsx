@@ -5,7 +5,7 @@ import { Button } from "frames.js/next";
 
 const handler = frames(async (ctx) => {
   const questionId = findDayFromUrl(ctx);
-  console.log(questionId, "what is Q id?", ctx.url);
+  console.log(questionId, "what is Q id?");
 
   //Flow:
   /* 

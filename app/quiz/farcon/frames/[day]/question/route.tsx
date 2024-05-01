@@ -2,6 +2,7 @@
 import {
   findDayFromUrl,
   getQuestionFromId,
+  getUserQuestionResponseFromUserId,
   saveUser,
 } from "../../database-operations";
 import { frames } from "../../frames";
@@ -12,11 +13,12 @@ export const POST = frames(async (ctx) => {
   const questionId = findDayFromUrl(ctx);
   const question = await getQuestionFromId(questionId);
 
-  console.log(ctx, "what is ctx??");
   if (!ctx.message) {
     throw new Error("Could not find CTX data!");
   }
   const user = await saveUser(ctx.message.requesterFid);
+  const hasAlreadyResponded = await getUserQuestionResponseFromUserId(user?.id);
+  console.log(hasAlreadyResponded, "HAS ALREADY RESPONDED");
 
   //If question has expired, render expired frame
   if (!question) {
@@ -24,6 +26,26 @@ export const POST = frames(async (ctx) => {
       image: (
         <div tw="flex flex-col">
           This day has expired! Please participate in next one
+          <p>
+            DAY: {questionId} {foo}
+          </p>
+        </div>
+      ),
+
+      buttons: [
+        <Button action="link" target={`http://localhost:3001/quiz/farcon`}>
+          Go to Leaderboard
+        </Button>,
+        <Button action="link" target={`https://warpcast.com/liquality`}>
+          Follow Liquality
+        </Button>,
+      ],
+    };
+  } else if (hasAlreadyResponded?.id) {
+    return {
+      image: (
+        <div tw="flex flex-col">
+          You already participated in todays quiz!
           <p>
             DAY: {questionId} {foo}
           </p>
