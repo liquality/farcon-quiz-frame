@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { currentURL, appURL } from "../../../utils";
+import { currentURL, appURL } from "../../../utils/utils";
 import { createDebugUrl } from "../../../debug";
 import type { Metadata } from "next";
 import { fetchMetadata } from "frames.js/next";

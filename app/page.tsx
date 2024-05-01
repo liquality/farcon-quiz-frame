@@ -2,7 +2,7 @@ import { fetchMetadata } from "frames.js/next";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { createDebugUrl } from "./debug";
-import { appURL, currentURL } from "./utils";
+import { appURL, currentURL } from "./utils/utils";
 import Navbar from "./quiz/farcon/components/Navbar";
 
 export async function generateMetadata(): Promise<Metadata> {
