@@ -18,11 +18,14 @@ const handler = frames(async (ctx) => {
   
   
   */
+
   return {
     image: (
       <div tw="flex">
-        {/* <img tw="flex" src="/../../../../../server-images/CORRECT_1.jpeg" /> */}
-        FARCON HISTORY QUIZ, day: {questionId}
+        <img
+          tw="flex"
+          src={`https://i.ibb.co/fYp4dCk/START-${{ questionId }}.jpg`}
+        />
       </div>
     ),
     buttons: [
