@@ -25,6 +25,15 @@ export async function saveUserQuestionResponse(
     await sql`INSERT INTO user_question_responses (question_id, user_id, response, correct_response, collective_id) VALUES (${questionId}, ${user?.id}, ${response}, ${correctResponse}, ${user?.collective_id});`
 }
 
+export async function createCollectives(collective: any) {
+        await sql`INSERT INTO collectives (name, c_address, c_wallet, c_pool, salt) VALUES (${collective.name}, ${collective.c_address}, ${collective.c_wallet}, ${collective.c_pool}, ${collective.salt});`
+}
+
+// update collective where name equals given name
+export async function updateCollective(collective: any) {
+    await sql`UPDATE collectives SET c_address = ${collective.c_address}, c_wallet = ${collective.c_wallet}, c_pool = ${collective.c_pool}, salt = ${collective.salt} WHERE name = ${collective.name};`
+}
+
 export async function determineCollectiveForUser(fid: number) {
     if (await isPowerBadgeUser(fid)) return 3 // power-badge = collective_id = 3
     else if (fid < 10000) return 1 //OG = collective_id = 1

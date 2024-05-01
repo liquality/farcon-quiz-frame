@@ -1,5 +1,5 @@
-import ethers from 'ethers'
-import { CMetadata, PoolParticipation } from '../types'
+import {ethers} from 'ethers'
+import { CMetadata } from '../type'
 import {
   HONEYPOT,
   HONEYPOT_ABI,
@@ -8,8 +8,6 @@ import {
   COLLECTIVE_FACTORY_ABI,
   POOL_ABI,
   C_WALLET_ABI,
-  SPORK_NFT_ABI,
-  SPORK_NFT,
 } from './constants'
 import { QueryResultRow } from '@vercel/postgres'
 
@@ -18,7 +16,7 @@ export async function createCollective(): Promise<CMetadata> {
     const provider = getProvider()
     const signer = getSigner(provider)
 
-    const cFactory = getCFactory(signer)
+    const cFactory: any  = getCFactory(signer)
     const salt = generateSalt()
     console.log(salt, 'wats salt?')
 
@@ -48,7 +46,7 @@ export async function createCollective(): Promise<CMetadata> {
 
     console.log('Collective created successfully! ', tx1, tx2)
 
-    return { address: cAddress, wallet: cWallet, salt }
+    return { address: cAddress, wallet: cWallet, nonceKey: BigInt(salt) }
   } catch (error) {
     throw new Error('Error creating collective: ' + error)
   }
@@ -60,7 +58,7 @@ export async function createPool(cAddress: string): Promise<string> {
     const signer = getSigner(provider)
 
     const honeyPot = HONEYPOT!
-    const collective = getCollective(signer, cAddress)
+    const collective: any = getCollective(signer, cAddress)
 
     const tx = await collective.createPools(
       ['0x0000000000000000000000000000000000000000'],
@@ -253,17 +251,17 @@ export async function mintSporkNFT(
   }
 }
 
-async function getPool(signer: ethers.Wallet, poolAddress: string) {
+async function getPool(signer: ethers.ContractRunner , poolAddress: string) {
   const pool = new ethers.Contract(poolAddress, POOL_ABI, signer)
   return pool
 }
 
-function getCollective(signer: ethers.ethers.Wallet, cAddress: string) {
+function getCollective(signer: ethers.ContractRunner , cAddress: string) {
   const collective = new ethers.Contract(cAddress, COLLECTIVE_ABI, signer)
   return collective
 }
 
-function getCFactory(signer: ethers.ethers.Wallet) {
+function getCFactory(signer: ethers.ContractRunner ) : ethers.Contract {
   const cFactory = new ethers.Contract(
     COLLECTIVE_FACTORY,
     COLLECTIVE_FACTORY_ABI,
@@ -272,30 +270,25 @@ function getCFactory(signer: ethers.ethers.Wallet) {
   return cFactory
 }
 
-function getCWallet(signer: ethers.ethers.Wallet, cWalletAddress: string) {
+function getCWallet(signer: ethers.Wallet, cWalletAddress: string) {
   const cWallet = new ethers.Contract(cWalletAddress, C_WALLET_ABI, signer)
   return cWallet
 }
 
-function getHonneyPot(signer: ethers.ethers.Wallet) {
+function getHonneyPot(signer: ethers.Wallet) {
   const honeyPot = new ethers.Contract(HONEYPOT, HONEYPOT_ABI, signer)
   return honeyPot
 }
 
-function getSporkNFT(signer: ethers.ethers.Wallet) {
-  const sporkNFT = new ethers.Contract(SPORK_NFT, SPORK_NFT_ABI, signer)
-  return sporkNFT
-}
-
-function getSigner(provider: ethers.providers.JsonRpcProvider) {
-  const signer = ethers.Wallet.fromMnemonic(
+function getSigner(provider: ethers.JsonRpcProvider) {
+  const signer = ethers.Wallet.fromPhrase(
     process.env.OPERATOR_MNEMONIC as string
   ).connect(provider)
   return signer
 }
 
 function getProvider() {
-  const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_URL)
+  const provider = new ethers.JsonRpcProvider("https://mainnet.base.org")
   return provider
 }
 
@@ -305,7 +298,7 @@ function getRecordPoolMintCallData(
   questionId: number,
   engagement: number
 ) {
-  const callData = new ethers.utils.Interface(
+  const callData = new ethers.Interface(
     COLLECTIVE_ABI
   ).encodeFunctionData('recordPoolMint', [
     poolAddress,
@@ -332,7 +325,7 @@ export function generateSalt(length: number = 16): number {
 }
 
 function getPoolWithdrawCallData(participant: string) {
-  const callData = new ethers.utils.Interface(POOL_ABI).encodeFunctionData(
+  const callData = new ethers.Interface(POOL_ABI).encodeFunctionData(
     'withdrawReward',
     [participant]
   )
