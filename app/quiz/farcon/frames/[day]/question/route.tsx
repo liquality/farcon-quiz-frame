@@ -24,10 +24,13 @@ export const POST = frames(async (ctx) => {
   //If question has expired, render expired frame
   if (!question) {
     return {
-      image:  getFrameImageUrl("EXPIRED_QUESTION"),
+      image: getFrameImageUrl("EXPIRED_QUESTION"),
 
       buttons: [
-        <Button action="link" target={`${process.env.APP_URL}/quiz/farcon`}>
+        <Button
+          action="link"
+          target={`${process.env.APP_URL}/quiz/farcon/frames`}
+        >
           Go to Leaderboard
         </Button>,
         <Button action="link" target={`https://warpcast.com/liquality`}>
@@ -37,9 +40,12 @@ export const POST = frames(async (ctx) => {
     };
   } else if (hasAlreadyResponded?.id) {
     return {
-      image:  getFrameImageUrl("ALREADY_SUBMITTED"),
+      image: getFrameImageUrl("ALREADY_SUBMITTED"),
       buttons: [
-        <Button action="link" target={`${process.env.APP_URL}/quiz/farcon`}>
+        <Button
+          action="link"
+          target={`${process.env.APP_URL}/quiz/farcon/frames`}
+        >
           Go to Leaderboard
         </Button>,
         <Button action="link" target={`https://warpcast.com/liquality`}>

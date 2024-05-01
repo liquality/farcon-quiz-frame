@@ -16,12 +16,15 @@ export const POST = frames(async (ctx) => {
   // based on searchParams, render the right image/text if leading or not
   if (isLeading === "true") {
     return {
-      image: getFrameImageUrl(`STATUS_WINING_${questionId}`),
+      image: getFrameImageUrl(`STATUS_WINNING_${questionId}`),
       buttons: [
         <Button action="link" target={`https://warpcast.com/liquality`}>
           Follow Liquality
         </Button>,
-        <Button action="link" target={`${process.env.APP_URL}/quiz/farcon`}>
+        <Button
+          action="link"
+          target={`${process.env.APP_URL}/quiz/farcon/frames`}
+        >
           Go to Leaderboard
         </Button>,
       ],
@@ -33,7 +36,10 @@ export const POST = frames(async (ctx) => {
         <Button action="link" target={`https://warpcast.com/liquality`}>
           Follow Liquality
         </Button>,
-        <Button action="link" target={`${process.env.APP_URL}/quiz/farcon`}>
+        <Button
+          action="link"
+          target={`${process.env.APP_URL}/quiz/farcon/frames`}
+        >
           Go to Leaderboard
         </Button>,
       ],

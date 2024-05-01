@@ -46,7 +46,10 @@ export const POST = frames(async (ctx) => {
       >
         See results
       </Button>,
-      <Button action="link" target={`${process.env.APP_URL}/quiz/farcon`}>
+      <Button
+        action="link"
+        target={`${process.env.APP_URL}/quiz/farcon/frames`}
+      >
         Go to Leaderboard
       </Button>,
     ],
