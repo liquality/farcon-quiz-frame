@@ -22,7 +22,7 @@ export async function saveUserQuestionResponse(
     correctResponse: boolean
 ) {
     const user = await getUserFromFid(fid)
-    await sql`INSERT INTO user_question_responses (question_id, user_id, response, correct_response) VALUES (${questionId}, ${user?.id}, ${response}, ${correctResponse});`
+    await sql`INSERT INTO user_question_responses (question_id, user_id, response, correct_response, collective_id) VALUES (${questionId}, ${user?.id}, ${response}, ${correctResponse}, ${user?.collective_id});`
 }
 
 export async function determineCollectiveForUser(fid: number) {
@@ -60,11 +60,44 @@ export async function isPowerBadgeUser(
     }
 }
 
+//For leaderboard
+export async function getIfCollectiveIdIsLeading(collectiveId: number) {
+    const correctResponsesArray = [];
+
+    const collectiveOneCorrectResponses = await getNumberOfCorrectResponsesByCollectiveId(1);
+    const collectiveTwoCorrectResponses = await getNumberOfCorrectResponsesByCollectiveId(2);
+    const collectiveThreeCorrectResponses = await getNumberOfCorrectResponsesByCollectiveId(3);
+
+    correctResponsesArray.push(collectiveOneCorrectResponses, collectiveTwoCorrectResponses, collectiveThreeCorrectResponses);
+
+    console.log(correctResponsesArray, 'CORRECT RESPONSES ARRAY')
+    // Find the maximum number of correct responses
+    const biggestNumber = Math.max(...correctResponsesArray);
+    console.log(biggestNumber, 'what is biggest number of array?')
+
+    // check if the provided collectiveId has the same number of correct responses as the maximum
+    const isLeading = Number(correctResponsesArray[collectiveId - 1]) === biggestNumber;
+    console.log(isLeading, 'this should be is leading or not? for collective ID:', collectiveId, correctResponsesArray[collectiveId - 1], 'correct responses array')
+
+    return isLeading;
+}
+
+
+//For leaderboard
+export async function getNumberOfCorrectResponsesByCollectiveId(collectiveId: number) {
+    const correctResponsesQuery =
+        await sql`SELECT COUNT(*) AS correct_responses FROM user_question_responses WHERE collective_id = ${collectiveId} AND correct_response = TRUE`
+    const correctResponsesCount = correctResponsesQuery.rows[0]?.correct_responses
+    return correctResponsesCount
+}
+
+
 export async function getCollective(collectiveName: string) {
     const existingCollective =
         await sql`SELECT * FROM collectives WHERE name = ${collectiveName}`
     return existingCollective.rows[0]
 }
+
 
 export async function getUserFromFid(fid: number) {
     const selectedNewUser = await sql`SELECT * FROM users WHERE fid = ${fid}`

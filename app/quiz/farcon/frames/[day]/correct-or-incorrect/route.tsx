@@ -1,7 +1,9 @@
 /* eslint-disable react/jsx-key */
 import {
   findDayFromUrl,
+  getIfCollectiveIdIsLeading,
   getQuestionFromId,
+  getUserFromFid,
   saveUserQuestionResponse,
 } from "../../database-operations";
 import { frames } from "../../frames";
@@ -26,15 +28,23 @@ export const POST = frames(async (ctx) => {
   );
   const imageText = correctResponse ? "correct response!" : "wrong response!";
 
+  //TODO get user from fid and check which collective they belong to, and if they are leading or not
+  const user = await getUserFromFid(ctx.message.requesterFid);
+  const isLeading = await getIfCollectiveIdIsLeading(user?.collective_id);
+  console.log(isLeading, "what is is Leading?", user?.collective_id);
+
   return {
-    image: <div tw="flex">That was the {imageText} Go see leaderboard.</div>,
+    image: <div tw="flex">That was the {imageText} Go see results.</div>,
     buttons: [
-      /*   <Button
+      <Button
         action="post"
-        target={{ pathname: "/route1", query: { foo: "baz" } }}
+        target={{
+          pathname: `${questionId}/result`,
+          query: { isLeading: isLeading.toString() },
+        }}
       >
-        Go to route 1
-      </Button>, */
+        See results
+      </Button>,
       <Button action="link" target={`http://localhost:3001/quiz/farcon`}>
         Go to Leaderboard
       </Button>,

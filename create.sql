@@ -30,6 +30,7 @@ CREATE TABLE user_question_responses (
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
     correct_response BOOLEAN,
     is_onchain BOOLEAN DEFAULT false,
+    collective_id INTEGER REFERENCES collectives(id) ON DELETE CASCADE,
     response VARCHAR(255)
 );
 
