@@ -17,6 +17,9 @@ export const POST = frames(async (ctx) => {
     return {
       image: <div tw="flex">You are LEADING</div>,
       buttons: [
+        <Button action="link" target={`https://warpcast.com/liquality`}>
+          Follow Liquality
+        </Button>,
         <Button action="link" target={`http://localhost:3001/quiz/farcon`}>
           Go to Leaderboard
         </Button>,
@@ -26,6 +29,9 @@ export const POST = frames(async (ctx) => {
     return {
       image: <div tw="flex">You are LOSING</div>,
       buttons: [
+        <Button action="link" target={`https://warpcast.com/liquality`}>
+          Follow Liquality
+        </Button>,
         <Button action="link" target={`http://localhost:3001/quiz/farcon`}>
           Go to Leaderboard
         </Button>,
