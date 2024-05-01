@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-key */
+import { getFrameImageUrl } from "../../../images";
 import {
   findDayFromUrl,
   getIfCollectiveIdIsLeading,
@@ -26,15 +27,15 @@ export const POST = frames(async (ctx) => {
     response,
     correctResponse
   );
-  const imageText = correctResponse ? "correct response!" : "wrong response!";
-
+  const imageKey = correctResponse ? "CORRECT" : "NOT_CORRECT";
+  const imageSrc = getFrameImageUrl(`${imageKey}_${questionId}`);
   //TODO get user from fid and check which collective they belong to, and if they are leading or not
   const user = await getUserFromFid(ctx.message.requesterFid);
   const isLeading = await getIfCollectiveIdIsLeading(user?.collective_id);
   console.log(isLeading, "what is is Leading?", user?.collective_id);
 
   return {
-    image: <div tw="flex">That was the {imageText} Go see results.</div>,
+    image: imageSrc,
     buttons: [
       <Button
         action="post"
