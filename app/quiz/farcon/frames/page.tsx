@@ -24,7 +24,7 @@ export default async function Home() {
     <div className="">
       <Navbar />
       <div className="p-5">
-        Here goes the leaderboard or something!
+        Coming soon...
         {/*   <LeaderboardTable /> */}
         {/* <Link href={createDebugUrl(url)} className="underline">
         Debug

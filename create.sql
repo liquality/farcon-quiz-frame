@@ -45,8 +45,8 @@ VALUES
     (3, 'When did Farcaster first cross 10k DAU?', '2024-05-05 10:00:00-00'::timestamp AT TIME ZONE 'MST', 'Feb 2024', '["Oct 2023", "Dec 2023", "Feb 2024", "Mar 2024"]'::json);
 
 
-INSERT INTO collectives (id, name) 
+INSERT INTO collectives (id, name, c_address, c_wallet, c_pool, salt) 
 VALUES 
-    (1, 'OG'),
-    (2, 'new'),
-    (3, 'power-badge');
+    (1, 'OG', "", "", "", ""),
+    (2, 'new', "", "", "", ""),
+    (3, 'power-badge', "", "", "", "");
