@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-key */
+import { getFrameImageUrl } from "../../../images";
 import { findDayFromUrl } from "../../database-operations";
 import { frames } from "../../frames";
 import { Button } from "frames.js/next";
@@ -15,7 +16,7 @@ export const POST = frames(async (ctx) => {
   // based on searchParams, render the right image/text if leading or not
   if (isLeading === "true") {
     return {
-      image: <div tw="flex">You are LEADING</div>,
+      image: getFrameImageUrl(`STATUS_WINING_${questionId}`),
       buttons: [
         <Button action="link" target={`https://warpcast.com/liquality`}>
           Follow Liquality
@@ -27,7 +28,7 @@ export const POST = frames(async (ctx) => {
     };
   } else {
     return {
-      image: <div tw="flex">You are LOSING</div>,
+      image: getFrameImageUrl(`STATUS_LOSING_${questionId}`),
       buttons: [
         <Button action="link" target={`https://warpcast.com/liquality`}>
           Follow Liquality

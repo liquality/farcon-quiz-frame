@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-key */
+import { getFrameImageUrl } from "../../../images";
 import {
   findDayFromUrl,
   getQuestionFromId,
@@ -23,14 +24,7 @@ export const POST = frames(async (ctx) => {
   //If question has expired, render expired frame
   if (!question) {
     return {
-      image: (
-        <div tw="flex flex-col">
-          This day has expired! Please participate in next one
-          <p>
-            DAY: {questionId} {foo}
-          </p>
-        </div>
-      ),
+      image:  getFrameImageUrl("EXPIRED_QUESTION"),
 
       buttons: [
         <Button action="link" target={`${process.env.APP_URL}/quiz/farcon`}>
@@ -43,15 +37,7 @@ export const POST = frames(async (ctx) => {
     };
   } else if (hasAlreadyResponded?.id) {
     return {
-      image: (
-        <div tw="flex flex-col">
-          You already participated in todays quiz!
-          <p>
-            DAY: {questionId} {foo}
-          </p>
-        </div>
-      ),
-
+      image:  getFrameImageUrl("ALREADY_SUBMITTED"),
       buttons: [
         <Button action="link" target={`${process.env.APP_URL}/quiz/farcon`}>
           Go to Leaderboard
@@ -77,14 +63,7 @@ export const POST = frames(async (ctx) => {
       )
     );
     return {
-      image: (
-        <div tw="flex flex-col">
-          When was the farcaster github org created?{" "}
-          <p>
-            DAY: {questionId} {foo}
-          </p>
-        </div>
-      ),
+      image: getFrameImageUrl(`QUESTION_${questionId}`),
       buttons: buttonOptions,
     };
   }

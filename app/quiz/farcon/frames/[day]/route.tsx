@@ -7,7 +7,6 @@ import { getFrameImageUrl } from "../../images";
 const handler = frames(async (ctx) => {
   const questionId = findDayFromUrl(ctx);
   console.log(questionId, "what is Q id?");
-  const imageSrc = getFrameImageUrl(`START_${questionId}`);
   //Flow:
   /* 
   User responds, we check his/her FID, 
@@ -19,7 +18,7 @@ const handler = frames(async (ctx) => {
   */
 
   return {
-    image: imageSrc,
+    image: getFrameImageUrl(`START_${questionId}`),
 
     buttons: [
       // With query params
