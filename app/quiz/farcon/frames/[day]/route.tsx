@@ -2,7 +2,6 @@
 import { findDayFromUrl } from "../database-operations";
 import { frames } from "../frames";
 import { Button } from "frames.js/next";
-import hej from "../../../../../server-images/CORRECT_1.jpeg";
 
 const handler = frames(async (ctx) => {
   const questionId = findDayFromUrl(ctx);

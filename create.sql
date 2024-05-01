@@ -1,7 +1,18 @@
+CREATE TABLE collectives (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    c_address VARCHAR(255),
+    c_wallet VARCHAR(255),
+    c_pool VARCHAR(255),
+    salt VARCHAR(255)
+);
+
+
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     wallet_address VARCHAR(255),
-    fid INTEGER
+    fid INTEGER,
+    collective_id INTEGER REFERENCES collectives(id) ON DELETE CASCADE
 );
 
 CREATE TABLE questions (
@@ -12,23 +23,14 @@ CREATE TABLE questions (
     expires_at timestamp null
 );
 
-CREATE TABLE collectives (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) UNIQUE NOT NULL,
-    c_address VARCHAR(255),
-    c_wallet VARCHAR(255),
-    c_pool VARCHAR(255),
-    salt VARCHAR(255)
-);
 
 CREATE TABLE user_question_responses (
     id SERIAL PRIMARY KEY,
     question_id INTEGER REFERENCES questions(id) ON DELETE CASCADE,
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-    correct_response VARCHAR(255)
+    correct_response VARCHAR(255),
     is_onchain BOOLEAN DEFAULT false,
-    response VARCHAR(255),
-    channel_id INTEGER REFERENCES channels(id) ON DELETE CASCADE
+    response VARCHAR(255)
 );
 
 
