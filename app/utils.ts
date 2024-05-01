@@ -8,7 +8,7 @@ export function currentURL(pathname: string): URL {
   try {
     return new URL(pathname, `${protocol}://${host}`);
   } catch (error) {
-    return new URL("http://localhost:3000");
+    return new URL(process.env.APP_URL ?? "http://localhost:3001");
   }
 }
 
@@ -16,7 +16,7 @@ export function appURL() {
   if (process.env.APP_URL) {
     return process.env.APP_URL;
   } else {
-    const url = process.env.APP_URL || vercelURL() || "http://localhost:3000";
+    const url = process.env.APP_URL || vercelURL() || "http://localhost:3001";
     console.warn(
       `Warning: APP_URL environment variable is not set. Falling back to ${url}.`
     );

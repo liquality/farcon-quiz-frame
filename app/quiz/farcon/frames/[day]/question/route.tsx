@@ -33,7 +33,7 @@ export const POST = frames(async (ctx) => {
       ),
 
       buttons: [
-        <Button action="link" target={`http://localhost:3001/quiz/farcon`}>
+        <Button action="link" target={`${process.env.APP_URL}/quiz/farcon`}>
           Go to Leaderboard
         </Button>,
         <Button action="link" target={`https://warpcast.com/liquality`}>
@@ -53,7 +53,7 @@ export const POST = frames(async (ctx) => {
       ),
 
       buttons: [
-        <Button action="link" target={`http://localhost:3001/quiz/farcon`}>
+        <Button action="link" target={`${process.env.APP_URL}/quiz/farcon`}>
           Go to Leaderboard
         </Button>,
         <Button action="link" target={`https://warpcast.com/liquality`}>
