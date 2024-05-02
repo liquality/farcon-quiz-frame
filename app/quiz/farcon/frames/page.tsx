@@ -15,7 +15,6 @@ export async function generateMetadata(): Promise<Metadata> {
     },
   };
 }
-console.log("hej");
 
 export default async function Home() {
   const url = currentURL("/quiz/farcon");

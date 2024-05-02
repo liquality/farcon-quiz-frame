@@ -29,6 +29,10 @@ const handler = frames(async (ctx) => {
         PLAY NOW
       </Button>,
     ],
+    headers: {
+      // Max cache age in seconds
+      "Cache-Control": "max-age=0",
+    },
   };
 });
 
