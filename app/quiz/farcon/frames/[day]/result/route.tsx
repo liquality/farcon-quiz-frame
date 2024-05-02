@@ -43,7 +43,7 @@ export const POST = frames(async (ctx) => {
     },
     {
       id: 2,
-      name: "THE WORLD",
+      name: "FC WORLD",
       icon: "NEW_ICON",
       count: collectiveThreeCorrectResponses,
     },
