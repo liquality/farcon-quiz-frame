@@ -2,11 +2,20 @@
 import { findDayFromUrl } from "../database-operations";
 import { frames } from "../frames";
 import { Button } from "frames.js/next";
-import { getFrameImageUrl } from "../../images";
+import { getFrameIconUrl, getFrameImageUrl } from "../../images";
+import * as fs from "node:fs/promises";
+import * as path from "node:path";
+
+const montserratFont = fs.readFile(
+  path.join(path.resolve(process.cwd(), "public"), "montserrat.ttf")
+);
 
 const handler = frames(async (ctx) => {
   const questionId = findDayFromUrl(ctx);
   console.log(questionId, "what is Q id?");
+  const [font] = await Promise.all([montserratFont]);
+  console.log(font, "what is hej?");
+
   //Flow:
   /* 
   User responds, we check his/her FID, 
@@ -18,8 +27,49 @@ const handler = frames(async (ctx) => {
   */
 
   return {
-    image: getFrameImageUrl(`START_${questionId}`),
+    //image: getFrameImageUrl(`START_${questionId}`),
 
+    image: (
+      <div
+        tw="flex flex-col bg-violet-500 items-center justify-center text-center"
+        style={{ width: "100%", height: "100%" }}
+      >
+        <div
+          tw="flex flex-col bg-white items-center justify-center text-center relative"
+          style={{ width: "95%", height: "90%" }}
+        >
+          <p
+            style={{
+              position: "absolute",
+              right: 30,
+              top: 0,
+            }}
+          >
+            <b>FARCON QUIZ</b>
+          </p>
+          <img width={50} src={getFrameIconUrl(`MEDAL_ICON`)} />
+
+          <p tw="text-center text-[44px] uppercase">
+            <b>Your TEAM IS WINNING THE FARCON HISTORY QUIZ GAME</b>
+          </p>
+          <div tw="flex justify-between">
+            <p tw="">CORRECT ANSWERS:</p>
+            <div tw="flex flex-col">
+              <p tw="text-xs mb--3">OGS</p>
+              <img width={50} src={getFrameIconUrl(`OG_ICON`)} />
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
+    /*  imageOptions: {
+      fonts: [
+        {
+          name: "Montserrat",
+          data: font,
+        },
+      ],
+    }, */
     buttons: [
       // With query params
       <Button
