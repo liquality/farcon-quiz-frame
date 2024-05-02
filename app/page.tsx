@@ -34,7 +34,7 @@ export default async function Home() {
             />
           </a>
           <br></br>
-          <a href="/quiz/farcon" className="underline">
+          <a href="/quiz/farcon/frames" className="underline">
             Go to Farcon Quiz 2024 Leaderboard
           </a>
         </div>
