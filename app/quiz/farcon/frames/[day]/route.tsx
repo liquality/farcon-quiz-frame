@@ -7,14 +7,19 @@ import * as fs from "node:fs/promises";
 import * as path from "node:path";
 
 const montserratFont = fs.readFile(
-  path.join(path.resolve(process.cwd(), "public"), "montserrat.ttf")
+  path.join(path.resolve(process.cwd(), "public"), "Montserrat-Regular.ttf")
 );
+
+// const montserratFont = fetch(
+//   new URL("/public/Inter-Bold.ttf", process.env.NEXT_PUBLIC_HOST)
+// ).then((res) => res.arrayBuffer());
 
 const handler = frames(async (ctx) => {
   const questionId = findDayFromUrl(ctx);
-  console.log(questionId, "what is Q id?");
-  const [font] = await Promise.all([montserratFont]);
-  console.log(font, "what is hej?");
+  console.log(questionId, "what is Q id?", path.join(path.resolve(process.cwd(), "public")));
+
+  const [montserratFontData] = await Promise.all([montserratFont]);
+  console.log(montserratFontData, "what is hej?");
 
   //Flow:
   /* 
@@ -31,8 +36,9 @@ const handler = frames(async (ctx) => {
 
     image: (
       <div
+      
         tw="flex flex-col bg-violet-500 items-center justify-center text-center"
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%", height: "100%",  fontFamily: "'Montserrat'", }}
       >
         <div
           tw="flex flex-col bg-white items-center justify-center text-center relative"
@@ -62,14 +68,14 @@ const handler = frames(async (ctx) => {
         </div>
       </div>
     ),
-    /*  imageOptions: {
+    imageOptions: {
       fonts: [
         {
           name: "Montserrat",
-          data: font,
+          data: montserratFontData,
         },
       ],
-    }, */
+    },
     buttons: [
       // With query params
       <Button
