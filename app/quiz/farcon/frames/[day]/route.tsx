@@ -26,7 +26,7 @@ const handler = frames(async (ctx) => {
         action="post"
         target={{ pathname: `${questionId}/question`, query: { foo: "bar" } }}
       >
-        PLAY
+        PLAY NOW
       </Button>,
     ],
   };

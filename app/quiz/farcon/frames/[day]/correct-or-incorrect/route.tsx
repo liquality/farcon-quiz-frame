@@ -44,13 +44,13 @@ export const POST = frames(async (ctx) => {
           query: { isLeading: isLeading.toString() },
         }}
       >
-        See results
+        TEAM RESULTS
       </Button>,
       <Button
         action="link"
-        target={`${process.env.APP_URL}/quiz/farcon/frames`}
+        target={`https://warpcast.com/~/compose?text=Farcon2024Quiz!&embeds[]=${process.env.APP_URL}/quiz/farcon/frames/${questionId}`}
       >
-        Go to Leaderboard
+        SHARE
       </Button>,
     ],
   };
