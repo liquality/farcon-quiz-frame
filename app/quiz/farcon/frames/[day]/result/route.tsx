@@ -23,7 +23,7 @@ export const POST = frames(async (ctx) => {
         </Button>,
         <Button
           action="link"
-          target={`https://warpcast.com/~/compose?text=Farcon2024Quiz!&embeds[]=${process.env.APP_URL}/quiz/farcon/frames/${questionId}`}
+          target={`https://warpcast.com/~/compose?text=Farcon%20History%20Quiz&embeds[]=${process.env.APP_URL}/quiz/farcon/frames/${questionId}`}
         >
           SHARE
         </Button>,
@@ -38,7 +38,7 @@ export const POST = frames(async (ctx) => {
         </Button>,
         <Button
           action="link"
-          target={`https://warpcast.com/~/compose?text=Farcon2024Quiz!&embeds[]=${process.env.APP_URL}/quiz/farcon/frames/${questionId}`}
+          target={`https://warpcast.com/~/compose?text=Farcon%20History%20Quiz&embeds[]=${process.env.APP_URL}/quiz/farcon/frames/${questionId}`}
         >
           SHARE
         </Button>,
