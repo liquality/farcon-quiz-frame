@@ -11,7 +11,7 @@ import * as fs from "node:fs/promises";
 import * as path from "node:path";
 
 const montserratFont = fs.readFile(
-  path.join(path.resolve(process.cwd(), "public"), "Montserrat-Regular.ttf")
+  path.join(path.resolve(process.cwd(), "public"), "Montserrat-Bold.ttf")
 );
 export const POST = frames(async (ctx) => {
   const isLeading = ctx.searchParams.isLeading;
