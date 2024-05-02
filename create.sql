@@ -40,9 +40,9 @@ CREATE TABLE user_question_responses (
 
 INSERT INTO questions (id, question, expires_at, correct_response, options) 
 VALUES 
-    (1, 'When was the Farcaster github org created?', '2024-05-03 10:00:00-00'::timestamp AT TIME ZONE 'MST', 'Jan 2022', '["Jan 2022", "April 2022", "Dec 2022"]'::json),
-    (2, 'When was the Farcaster OG NFT snapshot taken?', '2024-05-04 10:00:00-00'::timestamp AT TIME ZONE 'MST', 'Oct 2023', '["Dec 2022", "May 2023", "Oct 2022", "Feb 2024"]'::json),
-    (3, 'When did Farcaster first cross 10k DAU?', '2024-05-05 10:00:00-00'::timestamp AT TIME ZONE 'MST', 'Feb 2024', '["Oct 2023", "Dec 2023", "Feb 2024", "Mar 2024"]'::json);
+    (1, 'When was the Farcaster github org created?', '2024-05-03 09:00:00-00'::timestamp AT TIME ZONE 'MST', 'Jan 2022', '["Jan 2022", "April 2022", "Dec 2022"]'::json),
+    (2, 'When was the Farcaster OG NFT snapshot taken?', '2024-05-04 09:00:00-00'::timestamp AT TIME ZONE 'MST', 'Oct 2023', '["Dec 2022", "May 2023", "Oct 2022", "Feb 2024"]'::json),
+    (3, 'When did Farcaster first cross 10k DAU?', '2024-05-05 09:00:00-00'::timestamp AT TIME ZONE 'MST', 'Feb 2024', '["Oct 2023", "Dec 2023", "Feb 2024", "Mar 2024"]'::json);
 
 
 INSERT INTO collectives (id, name, c_address, c_wallet, c_pool, salt) 

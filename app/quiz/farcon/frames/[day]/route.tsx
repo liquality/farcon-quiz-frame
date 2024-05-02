@@ -26,6 +26,14 @@ const handler = frames(async (ctx) => {
   
   */
 
+  const correctAnswers = [
+    { name: "OGS", icon: "OG_ICON", count: 100 },
+    { name: "POWER BADGE USERS", icon: "POWER_ICON", count: 50 },
+    { name: "NEW USERS", icon: "NEW_ICON", count: 75 },
+
+    // Add more objects as needed
+  ];
+
   return {
     //image: getFrameImageUrl(`START_${questionId}`),
 
@@ -54,15 +62,32 @@ const handler = frames(async (ctx) => {
           </p>
           <div tw="flex justify-between">
             <p tw="">CORRECT ANSWERS:</p>
-            <div tw="flex flex-col">
-              <p tw="text-xs mb--3">OGS</p>
-              <img width={50} src={getFrameIconUrl(`OG_ICON`)} />
-            </div>
+            {correctAnswers.map((answer, index) => (
+              <div
+                key={index}
+                tw="flex flex-col ml-10 items-center justify-center text-center"
+              >
+                <p tw="text-[24px] ">{answer.name}</p>
+                <img
+                  height={80}
+                  width={80}
+                  src={getFrameIconUrl(answer.icon)}
+                  alt={`${answer.name}`}
+                />
+                <p tw="text-[24px]">{answer.count}</p>
+              </div>
+            ))}
+          </div>
+          <div tw="flex flex-row">
+            <img tw="mt-10 mr-5" width={80} src={getFrameIconUrl(`LIQ_LOGO`)} />
+            <p tw="text-[31px]">
+              Share to get more people in. More right answers = more prizes!{" "}
+            </p>
           </div>
         </div>
       </div>
     ),
-    /*  imageOptions: {
+    /*     imageOptions: {
       fonts: [
         {
           name: "Montserrat",
