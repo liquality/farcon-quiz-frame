@@ -2,20 +2,10 @@
 import { findDayFromUrl } from "../database-operations";
 import { frames } from "../frames";
 import { Button } from "frames.js/next";
-import { getFrameImageUrl } from "../../images";
+import { getFrameIconUrl, getFrameImageUrl } from "../../images";
 
 const handler = frames(async (ctx) => {
   const questionId = findDayFromUrl(ctx);
-  console.log(questionId, "what is Q id?");
-  //Flow:
-  /* 
-  User responds, we check his/her FID, 
-  if fid < 10,000, then he is in the OG collective
-  if fid > 10,000, then he is in the new collective
-
-  Database structure - see create.sql
-  
-  */
 
   return {
     image: getFrameImageUrl(`START_${questionId}`),
@@ -28,6 +18,15 @@ const handler = frames(async (ctx) => {
       >
         PLAY NOW
       </Button>,
+      /*    <Button
+        action="post"
+        target={{
+          pathname: `${questionId}/result`,
+          query: { isLeading: false },
+        }}
+      >
+        TEAM RESULTS
+      </Button>, */
     ],
     headers: {
       // Max cache age in seconds

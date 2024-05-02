@@ -2,6 +2,7 @@
 import { getFrameImageUrl } from "../../../images";
 import {
   findDayFromUrl,
+  getIfCollectiveIdIsLeading,
   getQuestionFromId,
   getUserQuestionResponseFromUserId,
   saveUser,
@@ -19,6 +20,9 @@ export const POST = frames(async (ctx) => {
   }
   const user = await saveUser(ctx.message.requesterFid);
   const hasAlreadyResponded = await getUserQuestionResponseFromUserId(user?.id);
+  console.log(user?.collective_id, "COLLECTIVE ID? for user");
+  const isLeading = await getIfCollectiveIdIsLeading(user?.collective_id);
+
   console.log(hasAlreadyResponded, "HAS ALREADY RESPONDED");
 
   //If question has expired, render expired frame
@@ -43,10 +47,13 @@ export const POST = frames(async (ctx) => {
       image: getFrameImageUrl("ALREADY_SUBMITTED"),
       buttons: [
         <Button
-          action="link"
-          target={`https://warpcast.com/~/compose?text=Farcon%20History%20Quiz&embeds[]=${process.env.APP_URL}/quiz/farcon/frames/${questionId}`}
+          action="post"
+          target={{
+            pathname: `${questionId}/result`,
+            query: { isLeading: isLeading.toString() },
+          }}
         >
-          SHARE
+          TEAM RESULTS
         </Button>,
         <Button action="link" target={`https://warpcast.com/liquality`}>
           Follow Liquality

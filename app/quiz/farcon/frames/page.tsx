@@ -9,7 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Farcon OG Collective Quiz",
     description:
-      "This is the frame quiz about Farcaster history, OGs vs new users!",
+      "This is the frame quiz about Farcaster history, OGs, power-users vs new users!",
     other: {
       ...(await fetchMetadata(new URL("/quiz/farcon/frames", appURL()))),
     },

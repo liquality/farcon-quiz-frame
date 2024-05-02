@@ -68,7 +68,7 @@ export async function getIfCollectiveIdIsLeading(collectiveId: number) {
     const collectiveTwoCorrectResponses = await getNumberOfCorrectResponsesByCollectiveId(2);
     const collectiveThreeCorrectResponses = await getNumberOfCorrectResponsesByCollectiveId(3);
 
-    correctResponsesArray.push(collectiveOneCorrectResponses, collectiveTwoCorrectResponses, collectiveThreeCorrectResponses);
+    correctResponsesArray.push(collectiveOneCorrectResponses, collectiveThreeCorrectResponses, collectiveTwoCorrectResponses);
 
     console.log(correctResponsesArray, 'CORRECT RESPONSES ARRAY')
     // Find the maximum number of correct responses
