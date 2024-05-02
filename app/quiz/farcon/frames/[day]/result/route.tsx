@@ -10,7 +10,10 @@ import { Button } from "frames.js/next";
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
 
-const montserratFont = fs.readFile(
+const montserratFontRegular = fs.readFile(
+  path.join(path.resolve(process.cwd(), "public"), "Montserrat-Regular.ttf")
+);
+const montserratFontBold = fs.readFile(
   path.join(path.resolve(process.cwd(), "public"), "Montserrat-Bold.ttf")
 );
 export const POST = frames(async (ctx) => {
@@ -20,7 +23,7 @@ export const POST = frames(async (ctx) => {
   const questionId = findDayFromUrl(ctx);
   const user = await getUserFromFid(ctx.message.requesterFid);
 
-  const [montserratFontData] = await Promise.all([montserratFont]);
+  const [montserratFontRegularData, montserratFontBoldData] = await Promise.all([montserratFontRegular, montserratFontBold]);
   const collectiveOneCorrectResponses =
     await getNumberOfCorrectResponsesByCollectiveId(1);
   const collectiveTwoCorrectResponses =
@@ -74,13 +77,16 @@ export const POST = frames(async (ctx) => {
                 position: "absolute",
                 right: 30,
                 top: 0,
+                fontWeight: 700,
               }}
             >
               <b>FARCON QUIZ</b>
             </p>
             <img tw="mt-10" width={50} src={getFrameIconUrl(`MEDAL_ICON`)} />
 
-            <p tw="text-center text-[44px] uppercase">
+            <p tw="text-center text-[44px] uppercase"  style={{
+            fontWeight: 700,
+          }}>
               <b>Your TEAM IS WINNING THE FARCON HISTORY QUIZ GAME</b>
             </p>
             <div tw="flex justify-between mt--8">
@@ -129,7 +135,13 @@ export const POST = frames(async (ctx) => {
         fonts: [
           {
             name: "Montserrat",
-            data: montserratFontData,
+            data: montserratFontRegularData,
+            weight: 400,
+          },
+          {
+            name: "Montserrat",
+            data: montserratFontBoldData,
+            weight: 700,
           },
         ],
       },
@@ -222,7 +234,13 @@ export const POST = frames(async (ctx) => {
         fonts: [
           {
             name: "Montserrat",
-            data: montserratFontData,
+            data: montserratFontRegularData,
+            weight: 400,
+          },
+          {
+            name: "Montserrat",
+            data: montserratFontBoldData,
+            weight: 700,
           },
         ],
       },
