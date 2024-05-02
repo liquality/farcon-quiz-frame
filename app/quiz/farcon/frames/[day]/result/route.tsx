@@ -66,7 +66,7 @@ export const POST = frames(async (ctx) => {
           }}
         >
           <div
-            tw="flex flex-col bg-white border-4 border-black-500 items-center justify-center text-center relative"
+            tw="flex flex-col bg-white border-4 border-black-500 rounded-md items-center justify-center text-center relative"
             style={{ width: "95%", height: "90%" }}
           >
             <p
@@ -159,7 +159,7 @@ export const POST = frames(async (ctx) => {
           }}
         >
           <div
-            tw="flex flex-col bg-white items-center justify-center text-center relative"
+            tw="flex flex-col bg-white  border-4 border-black-500 rounded-md items-center justify-center text-center relative"
             style={{ width: "95%", height: "90%" }}
           >
             <p
