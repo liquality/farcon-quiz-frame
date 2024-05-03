@@ -105,8 +105,8 @@ export async function getUserFromFid(fid: number) {
 }
 
 
-export async function getUserQuestionResponseFromUserId(userId: number) {
-    const response = await sql`SELECT * FROM user_question_responses WHERE user_id = ${userId}`
+export async function getUserQuestionResponseFromUserId(userId: number, questionId: string) {
+    const response = await sql`SELECT * FROM user_question_responses WHERE user_id = ${userId} AND question_id = ${Number(questionId)}`
     return response.rows[0]
 }
 

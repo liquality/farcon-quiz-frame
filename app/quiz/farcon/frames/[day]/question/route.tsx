@@ -19,7 +19,10 @@ export const POST = frames(async (ctx) => {
     throw new Error("Could not find CTX data!");
   }
   const user = await saveUser(ctx.message.requesterFid);
-  const hasAlreadyResponded = await getUserQuestionResponseFromUserId(user?.id);
+  const hasAlreadyResponded = await getUserQuestionResponseFromUserId(
+    user?.id,
+    questionId
+  );
   console.log(user?.collective_id, "COLLECTIVE ID? for user");
   const isLeading = await getIfCollectiveIdIsLeading(user?.collective_id);
 
